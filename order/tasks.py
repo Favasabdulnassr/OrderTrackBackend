@@ -22,7 +22,7 @@ def send_warehouse_notification_email(order_id):
     logger.info(f"📦 Task started: Preparing email for order ID {order_id}")
     try:
         order = Order.objects.get(id=order_id)
-        logger.info(f"✅ Order found: {order}")
+        logger.info(f" Order found: {order}")
         
         subject = f"New Order  - Order #{order.id}"
         
@@ -95,7 +95,7 @@ def send_warehouse_notification_email(order_id):
         
         
         """
-        logger.info(f"📧 Sending email to warehouse for order #{order.id}")
+        logger.info(f"Sending email to warehouse for order #{order.id}")
         send_mail(
             subject=subject,
             message=plain_message,
@@ -104,14 +104,14 @@ def send_warehouse_notification_email(order_id):
             html_message=html_message,
             fail_silently=False
         )
-        logger.info(f"✅ Email sent successfully for order #{order.id}")
+        logger.info(f"Email sent successfully for order #{order.id}")
         return f"Email sent successfully for order {order_id}"
         
     except Order.DoesNotExist:
-        logger.error(f"❌ Order with ID {order_id} does not exist.")
+        logger.error(f"Order with ID {order_id} does not exist.")
         return f"Order {order_id} not found"
     except Exception as e:
-        logger.exception(f"❌ Error sending email for order {order_id}: {str(e)}")
+        logger.exception(f"Error sending email for order {order_id}: {str(e)}")
         return f"Error sending email: {str(e)}"
     
 
