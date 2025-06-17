@@ -11,7 +11,6 @@ class Product(models.Model):
 class Order(models.Model):
     STATUS_CHOICES = [
         ('Order Placed', 'Order Placed'),
-        ('Confirmed', 'Confirmed'),
         ('Ready to Dispatch', 'Ready to Dispatch'),
     ]
 

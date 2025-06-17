@@ -36,7 +36,15 @@ EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
-WAREHOUSE_EMAIL = config('WAREHOUSE_EMAIL')
+
+IMAP_EMAIL_HOST = config('IMAP_EMAIL_HOST')    # IMAP server for Gmail
+IMAP_EMAIL_PORT = config('IMAP_EMAIL_PORT')
+
+WARE_HOUSE_EMAIL_PASSWORD = config('WARE_HOUSE_EMAIL_PASSWORD')
+WARE_HOUSE_EMAIL = config('WARE_HOUSE_EMAIL')
+
+
+
 
 CELERY_BROKER_URL = config('CELERY_BROKER_URL')
 CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND')
@@ -44,6 +52,20 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
+
+
+OPENROUTER_API_KEY = config('OPENROUTER_API_KEY')
+
+
+
+from celery.schedules import crontab
+
+CELERY_BEAT_SCHEDULE = {
+    'process-warehouse-emails': {
+        'task': 'order.tasks.process_warehouse_confirmation_emails',
+        'schedule': crontab(minute='*/1'),  # Run every 1 minutes
+    },
+}
 
 
 # Application definition
